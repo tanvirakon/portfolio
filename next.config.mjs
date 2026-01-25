@@ -1,5 +1,2 @@
-const nextConfig = {
-  output: 'export',
-  images: { unoptimized: true } // Required for static export
-};
+const nextConfig = {};
 export default nextConfig;
