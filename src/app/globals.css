@@ -30,6 +30,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (min-width: 768px) {
+  * {
+    cursor: none !important;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
