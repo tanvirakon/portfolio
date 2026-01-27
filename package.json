@@ -19,6 +19,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icon-cloud": "^4.1.7",
+    "react-parallax-tilt": "^1.7.317",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
