@@ -90,10 +90,10 @@ export const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b",
         scrolled
-          ? "bg-white/50 dark:bg-black/50 backdrop-blur-md border-b border-gray-200 dark:border-gray-800"
-          : "bg-transparent py-4",
+          ? "bg-white/50 dark:bg-black/50 backdrop-blur-md border-gray-200 dark:border-gray-800"
+          : "bg-transparent border-transparent",
       )}
     >
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
