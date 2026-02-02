@@ -25,7 +25,6 @@ export const Hero = () => {
             Available for Research Opportunities
           </div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            Hi, I&apos;m <br />
             <span className="text-blue-600 dark:text-blue-400">
               {resumeData.basics.name}
             </span>
