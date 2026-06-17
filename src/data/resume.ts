@@ -90,6 +90,17 @@ export const resumeData = {
       url: "https://www.codechef.com/users/tanvirakon",
     },
   ],
+  research: [
+    {
+      title:
+        "An Uncertainty-Aware Few-Shot Framework for Cross-Domain Plant Disease Classification",
+      role: "1st Author",
+      status: "Not Yet Published",
+      type: "Undergrad Thesis",
+      description:
+        "A research work on robust few-shot classification utilizing dual attention and predictive entropy to maintain high accuracy in wild, unconstrained environments.",
+    },
+  ],
   volunteering: [
     {
       organization: "FutureNation",

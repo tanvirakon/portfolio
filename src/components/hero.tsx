@@ -50,12 +50,12 @@ export const Hero = () => {
             </span>
           </div>
 
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-lg">
+          {/* <p className="text-lg text-gray-600 dark:text-gray-400 max-w-lg">
             Focusing on {resumeData.skills.core[0]}, {resumeData.skills.core[1]}{" "}
             and building scalable web applications.
-          </p>
+          </p> */}
 
-          <div className="flex gap-4 pt-4">
+          <div className="flex gap-4">
             {resumeData.basics.profiles.map((profile) => {
               const Icon =
                 profile.network === "GitHub"
