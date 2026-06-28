@@ -65,8 +65,8 @@ export const resumeData = {
       tech: ["React", "Express.js", "MongoDB", "JWT", "Stripe", "SSLCommerz"],
       summary:
         "Built a full-stack e-commerce platform using MERN with secure JWT-based auth. Implemented OTP-based password reset, role-based access control (Admin/Seller dashboards), product catalog CRUD, and integrated payment systems.",
-      link: "", // Add if known
-      repo: "", // Add if known
+      link: "https://megamart-ftsk.onrender.com/",
+      repo: "https://github.com/tanvirakon/MegaMart",
     },
     {
       name: "the_daily_cycle",
