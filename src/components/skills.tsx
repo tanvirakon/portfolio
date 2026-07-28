@@ -2,136 +2,52 @@
 
 import { resumeData } from "@/data/resume";
 import { motion } from "framer-motion";
-import { IconCloud } from "@/components/ui/icon-cloud";
+import { SectionLabel } from "@/components/section-label";
 
 export const Skills = () => {
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
+  const categories = [
+    { label: "Languages", items: resumeData.skills.languages },
+    { label: "Web", items: resumeData.skills.web },
+    { label: "Core", items: resumeData.skills.core },
+    { label: "ML", items: resumeData.skills.ml },
+    { label: "Tools", items: resumeData.skills.tools },
+    { label: "App", items: resumeData.skills.app },
+  ];
 
   return (
-    <section id="skills" className="py-20 relative overflow-hidden">
+    <section id="skills" className="py-20 border-t border-ink-rule">
       <div className="container px-6 mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl font-bold mb-4">Technical Skills</h2>
-          <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full" />
-        </div>
+        <SectionLabel title="Technical Skills" />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column: Skill Categories */}
-          <div className="space-y-8">
-            <motion.div
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              {/* Languages */}
-              <motion.div
-                variants={item}
-                className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700"
-              >
-                <h3 className="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                  Languages
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {resumeData.skills.languages.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Web Dev */}
-              <motion.div
-                variants={item}
-                className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700"
-              >
-                <h3 className="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                  Web Development
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {resumeData.skills.web.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                {/* Core */}
-                <motion.div
-                  variants={item}
-                  className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700"
-                >
-                  <h3 className="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                    Core
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {resumeData.skills.core.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Tools */}
-                <motion.div
-                  variants={item}
-                  className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700"
-                >
-                  <h3 className="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400">
-                    Tools
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {resumeData.skills.tools.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm font-medium"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right Column: 3D Cloud */}
+        <div className="max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center relative order-first lg:order-last"
           >
-            {/* Background Glow */}
-            <div className="absolute inset-0 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-            <IconCloud />
+            {categories.map((cat, idx) => (
+              <div
+                key={cat.label}
+                className={`grid grid-cols-[120px_1fr] md:grid-cols-[160px_1fr] gap-4 py-4 ${
+                  idx < categories.length - 1 ? "border-b border-ink-rule" : ""
+                }`}
+              >
+                <span className="font-mono text-xs text-ink-muted uppercase tracking-widest self-start pt-1">
+                  {cat.label}
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {cat.items.map((item) => (
+                    <span
+                      key={item}
+                      className="text-sm px-2.5 py-1 border border-ink-rule text-ink font-body"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>

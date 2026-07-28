@@ -50,6 +50,7 @@ export const resumeData = {
     web: ["HTML5", "CSS3", "React", "Express.js", "MongoDB", "MERN Stack"],
     app: ["Flutter (basic)"],
     tools: ["Git", "GitHub", "LaTeX", "Adobe Photoshop", "Adobe Premiere Pro"],
+    ml: ["NumPy", "Pandas", "PyTorch"],
     core: [
       "Data Structures & Algorithms",
       "Object-Oriented Programming",
@@ -103,10 +104,10 @@ export const resumeData = {
   ],
   volunteering: [
     {
-      organization: "FutureNation",
-      role: "Volunteer",
+      organization: "Chess.com",
+      role: "Regular Chess Player",
       summary:
-        "Contributing to community-driven initiatives and gaining exposure to teamwork, leadership, and technology-focused events.",
+        "Regular chess player on Chess.com with a 850+ rapid rating, demonstrating analytical thinking, pattern recognition, and strategic decision-making.",
     },
     {
       organization: "YouTube",

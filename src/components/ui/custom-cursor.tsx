@@ -8,9 +8,9 @@ export const CustomCursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 700 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
+  const ringConfig = { damping: 30, stiffness: 400, mass: 0.5 };
+  const ringX = useSpring(cursorX, ringConfig);
+  const ringY = useSpring(cursorY, ringConfig);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
@@ -43,27 +43,58 @@ export const CustomCursor = () => {
 
   return (
     <>
+      {/* Outer ring — follows with spring lag */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-blue-500 z-[9999] pointer-events-none hidden md:block"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-oxide/60 z-[9999] pointer-events-none hidden md:block"
         style={{
-          translateX: cursorXSpring,
-          translateY: cursorYSpring,
-          scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering
-            ? "rgba(59, 130, 246, 0.1)"
-            : "transparent",
+          translateX: ringX,
+          translateY: ringY,
         }}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+        animate={{
+          scale: isHovering ? 1.6 : 1,
+          backgroundColor: isHovering
+            ? "rgba(178, 58, 72, 0.08)"
+            : "rgba(178, 58, 72, 0)",
+          borderColor: isHovering
+            ? "rgba(178, 58, 72, 0.9)"
+            : "rgba(178, 58, 72, 0.5)",
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
       />
+
+      {/* Inner cross — tracks instantly */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-blue-500 rounded-full z-[9999] pointer-events-none hidden md:block"
+        className="fixed top-0 left-0 z-[9999] pointer-events-none hidden md:block"
         style={{
           translateX: cursorX,
           translateY: cursorY,
-          x: 12, // Center relative to the outer ring (32px / 2 - 8px / 2 + offset)
-          y: 12,
+          x: 8,
+          y: 8,
+          width: 16,
+          height: 16,
         }}
-      />
+      >
+        {/* Cross bar — horizontal */}
+        <motion.div
+          className="absolute top-1/2 left-0 w-full bg-oxide"
+          style={{ height: 1.5, marginTop: -0.75 }}
+          animate={{
+            rotate: isHovering ? 45 : 0,
+            scaleY: isHovering ? 0.7 : 1,
+          }}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+        />
+        {/* Cross bar — vertical */}
+        <motion.div
+          className="absolute left-1/2 top-0 h-full bg-oxide"
+          style={{ width: 1.5, marginLeft: -0.75 }}
+          animate={{
+            rotate: isHovering ? 45 : 0,
+            scaleX: isHovering ? 0.7 : 1,
+          }}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+        />
+      </motion.div>
     </>
   );
 };

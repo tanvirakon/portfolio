@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navLinks = [
   { name: "About", href: "#about" },
@@ -28,9 +29,8 @@ export const Navbar = () => {
         .map((id) => document.getElementById(id))
         .filter((section): section is HTMLElement => section !== null);
 
-      const scrollPosition = window.scrollY + 100; // Offset for navbar height
+      const scrollPosition = window.scrollY + 100;
 
-      // Check if we're at the bottom of the page
       if (
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 50
@@ -47,7 +47,6 @@ export const Navbar = () => {
           scrollPosition >= sectionTop &&
           scrollPosition < sectionTop + sectionHeight + 200
         ) {
-          // Added buffer
           currentSection = section.id;
         }
       });
@@ -58,7 +57,6 @@ export const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    // Initial check
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -93,70 +91,78 @@ export const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b",
         scrolled
-          ? "bg-white/50 dark:bg-black/50 backdrop-blur-md border-gray-200 dark:border-gray-800"
+          ? "bg-paper/80 backdrop-blur-md border-ink-rule"
           : "bg-transparent border-transparent",
       )}
     >
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         <Link
           href="/"
-          className="text-xl font-bold font-mono tracking-tighter hover:scale-105 transition-transform"
+          className="text-xl font-mono font-bold tracking-tighter hover:scale-105 transition-transform text-ink"
         >
-          &lt;akon /&gt;
+          TA
         </Link>
 
-        {/* Desktop Menu - Floating Pill Style */}
-        <div className="hidden md:flex items-center bg-gray-100/50 dark:bg-neutral-900/50 backdrop-blur-md p-1.5 rounded-full border border-gray-200/50 dark:border-white/10 shadow-sm">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleClick(e, link.href)}
-                className={cn(
-                  "relative px-5 py-2 text-sm font-medium rounded-full transition-colors duration-300 z-10",
-                  isActive
-                    ? "text-white dark:text-gray-900" // Active text (High contrast)
-                    : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white",
-                )}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="active-pill"
-                    className="absolute inset-0 bg-gray-900 dark:bg-white rounded-full -z-10 shadow-sm"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                {link.name}
-              </a>
-            );
-          })}
+        <div className="hidden md:flex items-center gap-6">
+          <div className="flex items-center bg-ink-faint/50 backdrop-blur-md p-1.5 rounded-full border border-ink-rule">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.substring(1);
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleClick(e, link.href)}
+                  className={cn(
+                    "relative px-5 py-2 text-sm font-mono rounded-full transition-colors duration-300 z-10",
+                    isActive
+                      ? "text-paper"
+                      : "text-ink-muted hover:text-ink",
+                  )}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-pill"
+                      className="absolute inset-0 bg-ink rounded-full -z-10"
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
+                    />
+                  )}
+                  {link.name}
+                </a>
+              );
+            })}
+          </div>
+
+          <ThemeToggle />
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            className="text-ink"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800 p-4 flex flex-col space-y-4 shadow-lg animate-in slide-in-from-top-2">
+        <div className="md:hidden absolute top-16 left-0 w-full bg-paper/95 backdrop-blur-md border-b border-ink-rule p-4 flex flex-col space-y-4 shadow-lg">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => handleClick(e, link.href)}
               className={cn(
-                "block py-2 text-sm font-medium",
+                "block py-2 text-sm font-mono",
                 activeSection === link.href.substring(1)
-                  ? "text-blue-600 dark:text-blue-400 font-bold"
-                  : "text-gray-600 dark:text-gray-400",
+                  ? "text-oxide font-bold"
+                  : "text-ink-muted",
               )}
             >
               {link.name}

@@ -3,27 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --color-paper: #F4F1EA;
+  --color-ink: #0E0E10;
+  --color-oxide: #B23A48;
+  --color-denim: #2A3A55;
+  --color-ink-rule: #E0DBD2;
+  --color-ink-muted: #8A8580;
+  --color-ink-faint: #D6D1C8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.dark {
+  --color-paper: #0E0E10;
+  --color-ink: #EDE7D6;
+  --color-oxide: #D4546A;
+  --color-denim: #8BA4C8;
+  --color-ink-rule: #2A2A2C;
+  --color-ink-muted: #6B6B6B;
+  --color-ink-faint: #1A1A1C;
 }
 
 html {
@@ -31,9 +27,26 @@ html {
 }
 
 @media (min-width: 768px) {
-  * {
-    cursor: none !important;
+  body {
+    cursor: none;
   }
+  a, button, input, textarea, select, [role="button"] {
+    cursor: none;
+  }
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+::selection {
+  background-color: rgba(178, 58, 72, 0.2);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), serif;
 }
 
 @layer utilities {
