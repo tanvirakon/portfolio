@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 interface SectionLabelProps {
   title: string;
@@ -8,27 +9,32 @@ interface SectionLabelProps {
 }
 
 export const SectionLabel = ({ title, id }: SectionLabelProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const underlineScaleX = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
+  const headingY = useTransform(scrollYProgress, [0.2, 0.5], [20, 0]);
+  const headingOpacity = useTransform(scrollYProgress, [0.2, 0.45], [0, 1]);
+
   return (
-    <div className="mb-16" id={id}>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="flex items-center gap-4">
-          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-ink">
+    <div className="mb-16" id={id} ref={ref}>
+      <div>
+        <div className="flex items-center gap-4 overflow-hidden">
+          <motion.h2
+            style={{ y: headingY, opacity: headingOpacity }}
+            className="text-3xl md:text-4xl font-display font-bold tracking-tight text-ink"
+          >
             {title}
-          </h2>
+          </motion.h2>
         </div>
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          style={{ scaleX: underlineScaleX }}
           className="mt-4 h-px bg-oxide origin-left"
         />
-      </motion.div>
+      </div>
     </div>
   );
 };

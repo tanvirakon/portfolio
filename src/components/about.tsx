@@ -1,8 +1,33 @@
 "use client";
 
 import { resumeData } from "@/data/resume";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { SectionLabel } from "@/components/section-label";
+import { useRef, useEffect, useState } from "react";
+
+const AnimatedNumber = ({ value, decimals = 2 }: { value: number; decimals?: number }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [display, setDisplay] = useState("0.00");
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const duration = 1200;
+    const startTime = Date.now();
+    const tick = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * value;
+      setDisplay(current.toFixed(decimals));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, value, decimals]);
+
+  return <span ref={ref} className="font-mono">{display}</span>;
+};
 
 export const About = () => {
   return (
@@ -14,7 +39,7 @@ export const About = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: 0.2 }}
           >
             <p className="text-ink leading-relaxed text-lg text-justify">
@@ -22,7 +47,7 @@ export const About = () => {
             </p>
 
             <div className="mt-8 font-mono text-sm text-ink-muted flex items-center gap-4">
-              <span>CGPA {resumeData.education[0].score}</span>
+              <span>CGPA <AnimatedNumber value={3.50} /></span>
               <span className="w-px h-4 bg-ink-rule" />
               <span>{resumeData.education[0].institution}</span>
               <span className="w-px h-4 bg-ink-rule" />
@@ -35,7 +60,7 @@ export const About = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: 0.4 }}
           >
             <h3 className="text-lg font-mono font-bold mb-6 text-ink-muted uppercase tracking-widest">
