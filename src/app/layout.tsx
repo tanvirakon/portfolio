@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { ScrollRail } from "@/components/ui/scroll-rail";
+import { SkillHighlightProvider } from "@/components/ui/skill-highlight-context";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,9 +41,11 @@ export default function RootLayout({
         className={`${inter.variable} ${fraunces.variable} ${jetbrainsMono.variable} font-body`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <CustomCursor />
-          <ScrollRail />
-          {children}
+          <SkillHighlightProvider>
+            <CustomCursor />
+            <ScrollRail />
+            {children}
+          </SkillHighlightProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -7,7 +7,7 @@ import { SectionLabel } from "@/components/section-label";
 
 export const Achievements = () => {
   return (
-    <section className="py-20 border-t border-ink-rule">
+    <section id="achievements" className="py-20 border-t border-ink-rule">
       <div className="container px-6 mx-auto">
         <SectionLabel title="Trajectory" />
 

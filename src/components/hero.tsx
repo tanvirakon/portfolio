@@ -31,8 +31,8 @@ const clipReveal = {
 
 export const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
-      <div className="container px-6 grid md:grid-cols-2 gap-12 items-center">
+    <section id="hero" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+      <div className="container px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
         <motion.div
           variants={stagger}
           initial="initial"

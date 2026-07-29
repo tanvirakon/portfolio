@@ -3,6 +3,7 @@
 import { resumeData } from "@/data/resume";
 import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/section-label";
+import { useSkillHighlight } from "@/components/ui/skill-highlight-context";
 
 const containerVariants = {
   initial: {},
@@ -24,6 +25,7 @@ const pillVariants = {
 };
 
 export const Skills = () => {
+  const { setHighlightedSkill } = useSkillHighlight();
   const categories = [
     { label: "Languages", items: resumeData.skills.languages },
     { label: "Web", items: resumeData.skills.web },
@@ -61,7 +63,9 @@ export const Skills = () => {
                     <motion.span
                       key={item}
                       variants={pillVariants}
-                      className="text-sm px-2.5 py-1 border border-ink-rule text-ink font-body transition-all duration-200 hover:border-oxide hover:-translate-y-0.5 hover:shadow-sm cursor-default"
+                      onMouseEnter={() => setHighlightedSkill(item)}
+                      onMouseLeave={() => setHighlightedSkill(null)}
+                      className="text-sm px-2.5 py-1 border border-ink-rule text-ink font-body transition-all duration-200 hover:border-oxide hover:-translate-y-0.5 hover:shadow-sm"
                     >
                       {item}
                     </motion.span>

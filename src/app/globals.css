@@ -6,6 +6,7 @@
   --color-paper: #F4F1EA;
   --color-ink: #0E0E10;
   --color-oxide: #B23A48;
+  --color-oxide-rgb: 178, 58, 72;
   --color-denim: #2A3A55;
   --color-ink-rule: #E0DBD2;
   --color-ink-muted: #8A8580;
@@ -16,6 +17,7 @@
   --color-paper: #0E0E10;
   --color-ink: #EDE7D6;
   --color-oxide: #D4546A;
+  --color-oxide-rgb: 212, 84, 106;
   --color-denim: #8BA4C8;
   --color-ink-rule: #2A2A2C;
   --color-ink-muted: #6B6B6B;
@@ -24,6 +26,24 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+html::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 @media (min-width: 768px) {
@@ -54,7 +74,7 @@ body::before {
 }
 
 ::selection {
-  background-color: rgba(178, 58, 72, 0.2);
+  background-color: rgba(var(--color-oxide-rgb), 0.2);
 }
 
 h1, h2, h3, h4, h5, h6 {
