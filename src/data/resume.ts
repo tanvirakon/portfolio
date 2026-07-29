@@ -98,6 +98,7 @@ export const resumeData = {
       role: "1st Author",
       status: "Not Yet Published",
       type: "Undergrad Thesis",
+      url: "",
       description:
         "A research work on robust few-shot classification utilizing dual attention and predictive entropy to maintain high accuracy in wild, unconstrained environments.",
     },
