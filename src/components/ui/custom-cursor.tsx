@@ -53,11 +53,11 @@ export const CustomCursor = () => {
         animate={{
           scale: isHovering ? 1.6 : 1,
           backgroundColor: isHovering
-            ? "rgba(178, 58, 72, 0.08)"
-            : "rgba(178, 58, 72, 0)",
+            ? "rgba(var(--color-oxide-rgb), 0.08)"
+            : "rgba(var(--color-oxide-rgb), 0)",
           borderColor: isHovering
-            ? "rgba(178, 58, 72, 0.9)"
-            : "rgba(178, 58, 72, 0.5)",
+            ? "rgba(var(--color-oxide-rgb), 0.9)"
+            : "rgba(var(--color-oxide-rgb), 0.5)",
         }}
         transition={{ type: "spring", stiffness: 300, damping: 25 }}
       />

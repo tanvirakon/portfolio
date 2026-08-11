@@ -95,12 +95,14 @@ export const resumeData = {
     {
       title:
         "An Uncertainty-Aware Few-Shot Framework for Cross-Domain Plant Disease Classification",
-      role: "1st Author",
-      status: "Not Yet Published",
-      type: "Undergrad Thesis",
+      role: "First author",
+      status: "Thesis in progress",
+      type: "Undergraduate thesis",
+      methods: ["Few-shot learning", "Dual attention", "Predictive entropy"],
+      domain: "Plant disease classification",
       url: "",
       description:
-        "A research work on robust few-shot classification utilizing dual attention and predictive entropy to maintain high accuracy in wild, unconstrained environments.",
+        "Investigating whether uncertainty-aware few-shot learning can make plant disease classification more reliable across wild, unconstrained environments.",
     },
   ],
   volunteering: [
